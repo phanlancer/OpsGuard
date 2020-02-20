@@ -1,11 +1,9 @@
-pragma solidity 0.4.19;
+pragma solidity >=0.4.19 <0.6.2;
 
 import "./SellableToken.sol";
 import "./LockupContract.sol";
 
-
 contract ICO is SellableToken {
-
     SellableToken public privateSale;
     LockupContract public lockupContract;
 
@@ -31,45 +29,48 @@ contract ICO is SellableToken {
         address _compensationAddress,
         uint256 _etherPriceInUSD, // if price 709.38000 the  value has to be 70938000
         uint256 _maxTokenSupply
-    ) public SellableToken(
-        _token,
-        _etherHolder,
-        _compensationAddress,
-        _etherPriceInUSD,
-        _maxTokenSupply
-    ) {
+    )
+        public
+        SellableToken(
+            _token,
+            _etherHolder,
+            _compensationAddress,
+            _etherPriceInUSD,
+            _maxTokenSupply
+        )
+    {
         tiers.push(
             Tier(
-                uint256(40000000).mul(uint256(10) ** DECIMALS),
+                uint256(40000000).mul(uint256(10)**DECIMALS),
                 uint256(6000),
                 1525046400,
                 1525564800
             )
-        );//@ 0,06 USD PreICO
+        ); //@ 0,06 USD PreICO
         tiers.push(
             Tier(
-                uint256(150000000).mul(uint256(10) ** DECIMALS),
+                uint256(150000000).mul(uint256(10)**DECIMALS),
                 uint256(8000),
                 1526256000,
                 1526774400
             )
-        );//@ 0,08 USD
+        ); //@ 0,08 USD
         tiers.push(
             Tier(
-                uint256(150000000).mul(uint256(10) ** DECIMALS),
+                uint256(150000000).mul(uint256(10)**DECIMALS),
                 uint256(10000),
                 1526860800,
                 1527379200
             )
-        );//@ 0,10 USD
+        ); //@ 0,10 USD
         tiers.push(
             Tier(
-                uint256(150000000).mul(uint256(10) ** DECIMALS),
+                uint256(150000000).mul(uint256(10)**DECIMALS),
                 uint256(12000),
                 1527465600,
                 1527984000
             )
-        );//@ 0,12 USD
+        ); //@ 0,12 USD
 
         startTime = 1526256000;
         endTime = 1527984000;
@@ -94,7 +95,10 @@ contract ICO is SellableToken {
         }
     }
 
-    function changeICODates(uint8 _tierId, uint256 _start, uint256 _end) public onlyOwner {
+    function changeICODates(uint8 _tierId, uint256 _start, uint256 _end)
+        public
+        onlyOwner
+    {
         if (_start != 0 && _start < _end && _tierId < tiers.length) {
             Tier storage icoTier = tiers[_tierId];
             icoTier.startTime = _start;
@@ -108,8 +112,13 @@ contract ICO is SellableToken {
     }
 
     function burnUnsoldTokens() public onlyOwner {
-        if (block.timestamp >= tiers[PRE_ICO_TIER].endTime && preICOStats.burned == false) {
-            token.burnTokens(tiers[PRE_ICO_TIER].maxAmount.sub(preICOStats.soldTokens));
+        if (
+            block.timestamp >= tiers[PRE_ICO_TIER].endTime &&
+            preICOStats.burned == false
+        ) {
+            token.burnTokens(
+                tiers[PRE_ICO_TIER].maxAmount.sub(preICOStats.soldTokens)
+            );
             preICOStats.burned = true;
         }
         if (block.timestamp >= endTime && maxTokenSupply > soldTokens) {
@@ -130,7 +139,10 @@ contract ICO is SellableToken {
 
     function getActiveTier() public view returns (uint8) {
         for (uint8 i = 0; i < tiers.length; i++) {
-            if (block.timestamp >= tiers[i].startTime && block.timestamp <= tiers[i].endTime) {
+            if (
+                block.timestamp >= tiers[i].startTime &&
+                block.timestamp <= tiers[i].endTime
+            ) {
                 return i;
             }
         }
@@ -138,10 +150,11 @@ contract ICO is SellableToken {
         return uint8(tiers.length);
     }
 
-    function calculateTokensAmount(uint256 _value, bool _isEther) public view returns (
-        uint256 tokenAmount,
-        uint256 currencyAmount
-    ) {
+    function calculateTokensAmount(uint256 _value, bool _isEther)
+        public
+        view
+        returns (uint256 tokenAmount, uint256 currencyAmount)
+    {
         if (_value == 0) {
             return (0, 0);
         }
@@ -168,11 +181,17 @@ contract ICO is SellableToken {
                 return (0, 0);
             }
             currencyAmount = uint256(1 ether).mul(_value).div(etherPriceInUSD);
-            tokenAmount = _value.mul(uint256(10) ** DECIMALS).div(tiers[activeTier].price);
+            tokenAmount = _value.mul(uint256(10)**DECIMALS).div(
+                tiers[activeTier].price
+            );
         }
     }
 
-    function calculateEthersAmount(uint256 _amount) public view returns (uint256 ethersAmount) {
+    function calculateEthersAmount(uint256 _amount)
+        public
+        view
+        returns (uint256 ethersAmount)
+    {
         uint8 activeTier = getActiveTier();
 
         if (activeTier == tiers.length) {
@@ -184,29 +203,37 @@ contract ICO is SellableToken {
             }
         }
 
-        if (_amount == 0 || _amount.mul(tiers[activeTier].price) < minPurchase) {
+        if (
+            _amount == 0 || _amount.mul(tiers[activeTier].price) < minPurchase
+        ) {
             return 0;
         }
 
-        ethersAmount = _amount.mul(tiers[activeTier].price).div(etherPriceInUSD);
+        ethersAmount = _amount.mul(tiers[activeTier].price).div(
+            etherPriceInUSD
+        );
     }
 
     function getMinEthersInvestment() public view returns (uint256) {
         return uint256(1 ether).mul(minPurchase).div(etherPriceInUSD);
     }
 
-    function getStats() public view returns (
-        uint256 start,
-        uint256 end,
-        uint256 sold,
-        uint256 totalSoldTokens,
-        uint256 maxSupply,
-        uint256 min,
-        uint256 soft,
-        uint256 hard,
-        uint256 tokensPerEth,
-        uint256[16] tiersData
-    ) {
+    function getStats()
+        public
+        view
+        returns (
+            uint256 start,
+            uint256 end,
+            uint256 sold,
+            uint256 totalSoldTokens,
+            uint256 maxSupply,
+            uint256 min,
+            uint256 soft,
+            uint256 hard,
+            uint256 tokensPerEth,
+            uint256[16] tiersData
+        )
+    {
         start = startTime;
         end = endTime;
         sold = soldTokens;
@@ -230,7 +257,11 @@ contract ICO is SellableToken {
     }
 
     function isRefundPossible() public view returns (bool) {
-        if (getActiveTier() != tiers.length || block.timestamp < startTime || collectedUSD >= softCap) {
+        if (
+            getActiveTier() != tiers.length ||
+            block.timestamp < startTime ||
+            collectedUSD >= softCap
+        ) {
             return false;
         }
         return true;
@@ -253,13 +284,20 @@ contract ICO is SellableToken {
         return true;
     }
 
-    function mintPreICO(address _address, uint256 _tokenAmount, uint256 _ethAmount, uint256 _usdAmount) internal returns (uint256) {
+    function mintPreICO(
+        address _address,
+        uint256 _tokenAmount,
+        uint256 _ethAmount,
+        uint256 _usdAmount
+    ) internal returns (uint256) {
         uint256 mintedAmount = token.mint(_address, _tokenAmount);
 
         require(mintedAmount == _tokenAmount);
 
         preICOStats.soldTokens = preICOStats.soldTokens.add(_tokenAmount);
-        preICOStats.collectedEthers = preICOStats.collectedEthers.add(_ethAmount);
+        preICOStats.collectedEthers = preICOStats.collectedEthers.add(
+            _ethAmount
+        );
         preICOStats.collectedUSD = preICOStats.collectedUSD.add(_usdAmount);
 
         require(tiers[PRE_ICO_TIER].maxAmount >= preICOStats.soldTokens);
@@ -300,7 +338,9 @@ contract ICO is SellableToken {
             collectedEthers = collectedEthers.add(_value);
             collectedUSD = collectedUSD.add(usdAmount);
 
-            require(hardCap >= collectedUSD && usdAmount > 0 && mintedAmount > 0);
+            require(
+                hardCap >= collectedUSD && usdAmount > 0 && mintedAmount > 0
+            );
 
             etherBalances[_address] = etherBalances[_address].add(_value);
         }
