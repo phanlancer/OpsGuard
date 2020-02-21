@@ -83,7 +83,7 @@ contract ICO is SellableToken {
     }
 
     function setLockupContract(address _lockupContract) public onlyOwner {
-        require(_lockupContract != address(0));
+        require(_lockupContract != address(0), "invalid address");
         lockupContract = LockupContract(_lockupContract);
     }
 
