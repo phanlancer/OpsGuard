@@ -23,7 +23,7 @@ contract ICO is SellableToken {
         bool burned;
     }
 
-    function ICO(
+    constructor(
         address _token,
         address _etherHolder,
         address _compensationAddress,
