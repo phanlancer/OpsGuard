@@ -292,7 +292,10 @@ contract ICO is SellableToken {
     ) internal returns (uint256) {
         uint256 mintedAmount = token.mint(_address, _tokenAmount);
 
-        require(mintedAmount == _tokenAmount);
+        require(
+            mintedAmount == _tokenAmount,
+            "token amount and minted amount should be same"
+        );
 
         preICOStats.soldTokens = preICOStats.soldTokens.add(_tokenAmount);
         preICOStats.collectedEthers = preICOStats.collectedEthers.add(
