@@ -303,7 +303,10 @@ contract ICO is SellableToken {
         );
         preICOStats.collectedUSD = preICOStats.collectedUSD.add(_usdAmount);
 
-        require(tiers[PRE_ICO_TIER].maxAmount >= preICOStats.soldTokens);
+        require(
+            tiers[PRE_ICO_TIER].maxAmount >= preICOStats.soldTokens,
+            "max amount should be greater than sold tokens"
+        );
 
         if (preICOStats.collectedUSD <= compensationAmount) {
             compensatedAmount = compensatedAmount.add(_usdAmount);
