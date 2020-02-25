@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "minimetoken": "^0.2.0",
-    "truffle": "4.0.6",
+    "truffle": "^5.1.14",
     "zeppelin-solidity": "^1.7.0"
   },
   "devDependencies": {
