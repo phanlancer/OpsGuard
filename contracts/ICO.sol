@@ -348,7 +348,8 @@ contract ICO is SellableToken {
             collectedUSD = collectedUSD.add(usdAmount);
 
             require(
-                hardCap >= collectedUSD && usdAmount > 0 && mintedAmount > 0
+                hardCap >= collectedUSD && usdAmount > 0 && mintedAmount > 0,
+                "hardCap >= collectedUSD && usdAmount > 0 && mintedAmount > 0"
             );
 
             etherBalances[_address] = etherBalances[_address].add(_value);
