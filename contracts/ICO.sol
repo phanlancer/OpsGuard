@@ -337,7 +337,10 @@ contract ICO is SellableToken {
 
         if (activeTier == PRE_ICO_TIER) {
             mintedAmount = mintPreICO(_address, tokenAmount, _value, usdAmount);
-            require(usdAmount > 0 && mintedAmount > 0);
+            require(
+                usdAmount > 0 && mintedAmount > 0,
+                "usd amount should be greater than minted amount"
+            );
         } else {
             mintedAmount = mintInternal(_address, tokenAmount);
 
