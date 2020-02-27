@@ -37,7 +37,6 @@
     "chai-as-promised": "^7.1.1",
     "eth-gas-reporter": "^0.2.15",
     "ethereumjs-abi": "^0.6.5",
-    "ethereumjs-testrpc": "^4.1.3",
     "ganache-cli": "^6.0.3",
     "husky": "^0.14.3",
     "mocha": "^5.0.0",
