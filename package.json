@@ -20,9 +20,8 @@
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "solhint": "solhint 'contracts/**/*.sol'",
-    "solium": "solium -d contracts/",
-    "precommit": "npm run solhint && npm run coverage && npm run solium",
-    "test:ci": "npm run solhint && npm run coverage && npm run ganache && npm run test && npm run solium"
+    "precommit": "npm run solhint",
+    "test:ci": "npm run solhint && npm run ganache && npm run test"
   },
   "directories": {
     "test": "test"
@@ -44,7 +43,6 @@
     "mocha": "^5.0.0",
     "mocha-junit-reporter": "^1.17.0",
     "mocha-multi-reporters": "^1.1.7",
-    "solhint": "^2.3.0",
-    "solium": "^1.1.6"
+    "solhint": "^2.3.0"
   }
 }
