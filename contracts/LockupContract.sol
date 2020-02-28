@@ -1,4 +1,4 @@
-pragma solidity 0.4.19;
+pragma solidity >=0.4.19 <0.6.2;
 
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import "./Ownable.sol";
@@ -6,9 +6,7 @@ import "./OpsToken.sol";
 import "./SellableToken.sol";
 import "./Referral.sol";
 
-
 contract LockupContract is Ownable {
-
     OpsToken public token;
     SellableToken public ico;
     Referral public referral;
@@ -18,15 +16,17 @@ contract LockupContract is Ownable {
     uint256 public lockPeriod = 2 weeks;
     uint256 public contributionLockPeriod = uint256(1 years).div(2);
 
-    mapping (address => uint256) public lockedAmount;
-    mapping (address => uint256) public lockedContributions;
+    mapping(address => uint256) public lockedAmount;
+    mapping(address => uint256) public lockedContributions;
 
-    function LockupContract(
-        address _token,
-        address _ico,
-        address _referral
-    ) public {
-        require(_token != address(0) && _ico != address(0) && _referral != address(0));
+    function LockupContract(address _token, address _ico, address _referral)
+        public
+    {
+        require(
+            _token != address(0) &&
+                _ico != address(0) &&
+                _referral != address(0)
+        );
         token = OpsToken(_token);
         ico = SellableToken(_ico);
         referral = Referral(_referral);
@@ -63,11 +63,17 @@ contract LockupContract is Ownable {
 
     function logLargeContribution(address _address, uint256 _amount) public {
         if (msg.sender == address(ico)) {
-            lockedContributions[_address] = lockedContributions[_address].add(_amount);
+            lockedContributions[_address] = lockedContributions[_address].add(
+                _amount
+            );
         }
     }
 
-    function isTransferAllowed(address _address, uint256 _value) public view returns (bool) {
+    function isTransferAllowed(address _address, uint256 _value)
+        public
+        view
+        returns (bool)
+    {
         if (ico.endTime().add(lockPeriod) < block.timestamp) {
             return checkLargeContributionsLock(_address, _value);
         }
@@ -78,11 +84,18 @@ contract LockupContract is Ownable {
         return false;
     }
 
-    function checkLargeContributionsLock(address _address, uint256 _value) public view returns (bool) {
+    function checkLargeContributionsLock(address _address, uint256 _value)
+        public
+        view
+        returns (bool)
+    {
         if (ico.endTime().add(contributionLockPeriod) < block.timestamp) {
             return true;
         }
-        if (token.balanceOf(_address).sub(lockedContributions[_address]) >= _value) {
+        if (
+            token.balanceOf(_address).sub(lockedContributions[_address]) >=
+            _value
+        ) {
             return true;
         }
 
