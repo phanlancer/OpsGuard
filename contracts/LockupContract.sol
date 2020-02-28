@@ -19,9 +19,7 @@ contract LockupContract is Ownable {
     mapping(address => uint256) public lockedAmount;
     mapping(address => uint256) public lockedContributions;
 
-    function LockupContract(address _token, address _ico, address _referral)
-        public
-    {
+    constructor(address _token, address _ico, address _referral) public {
         require(
             _token != address(0) &&
                 _ico != address(0) &&
