@@ -23,7 +23,8 @@ contract LockupContract is Ownable {
         require(
             _token != address(0) &&
                 _ico != address(0) &&
-                _referral != address(0)
+                _referral != address(0),
+            "invalid token or ico or referral address"
         );
         token = OpsToken(_token);
         ico = SellableToken(_ico);
