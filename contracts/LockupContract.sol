@@ -32,12 +32,12 @@ contract LockupContract is Ownable {
     }
 
     function setTokenContract(address _token) public onlyOwner {
-        require(_token != address(0));
+        require(_token != address(0), "invalid token address");
         token = OpsToken(_token);
     }
 
     function setICO(address _ico) public onlyOwner {
-        require(_ico != address(0));
+        require(_ico != address(0), "invalid ICO address");
         ico = SellableToken(_ico);
     }
 
