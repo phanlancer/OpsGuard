@@ -42,7 +42,7 @@ contract LockupContract is Ownable {
     }
 
     function setRefferal(address _referral) public onlyOwner {
-        require(_referral != address(0));
+        require(_referral != address(0), "invalid referral address");
         referral = Referral(_referral);
     }
 
