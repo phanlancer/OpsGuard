@@ -21,7 +21,7 @@ contract MintingERC20 is OpsERC20 {
         _;
     }
 
-    function MintingERC20(
+    constructor(
         uint256 _initialSupply,
         uint256 _maxSupply,
         string _tokenName,
