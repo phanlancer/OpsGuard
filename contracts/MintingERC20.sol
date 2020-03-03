@@ -1,25 +1,22 @@
-pragma solidity 0.4.19;
-
+pragma solidity >=0.4.19 <0.6.2;
 
 import "./OpsERC20.sol";
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
-
 
 /*
 This contract manages the minters and the modifier to allow mint to happen only if called by minters
 This contract contains basic minting functionality though
 */
 contract MintingERC20 is OpsERC20 {
-
     using SafeMath for uint256;
 
     //Variables
-    mapping (address => bool) public minters;
+    mapping(address => bool) public minters;
 
     uint256 public maxSupply;
 
     //Modifiers
-    modifier onlyMinters () {
+    modifier onlyMinters() {
         require(true == minters[msg.sender]);
         _;
     }
@@ -33,7 +30,15 @@ contract MintingERC20 is OpsERC20 {
         bool _transferAllSupplyToOwner,
         bool _locked
     )
-        public OpsERC20(_initialSupply, _tokenName, _decimals, _symbol, _transferAllSupplyToOwner, _locked)
+        public
+        OpsERC20(
+            _initialSupply,
+            _tokenName,
+            _decimals,
+            _symbol,
+            _transferAllSupplyToOwner,
+            _locked
+        )
     {
         standard = "MintingERC20 0.1";
         minters[msg.sender] = true;
@@ -48,7 +53,11 @@ contract MintingERC20 is OpsERC20 {
         minters[_minter] = false;
     }
 
-    function mint(address _addr, uint256 _amount) public onlyMinters returns (uint256) {
+    function mint(address _addr, uint256 _amount)
+        public
+        onlyMinters
+        returns (uint256)
+    {
         if (true == locked) {
             return uint256(0);
         }
