@@ -17,7 +17,7 @@ contract MintingERC20 is OpsERC20 {
 
     //Modifiers
     modifier onlyMinters() {
-        require(true == minters[msg.sender]);
+        require(true == minters[msg.sender], "only minters allowed");
         _;
     }
 
