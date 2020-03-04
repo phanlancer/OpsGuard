@@ -17,7 +17,7 @@ contract Multivest is Ownable {
     event Contribution(address holder, uint256 value, uint256 tokens);
 
     modifier onlyAllowedMultivests(address _addresss) {
-        require(allowedMultivests[_addresss] == true);
+        require(allowedMultivests[_addresss] == true, "invalid address");
         _;
     }
 
