@@ -1,16 +1,13 @@
-pragma solidity 0.4.19;
-
+pragma solidity >=0.4.19 <0.6.2;
 
 import "./Ownable.sol";
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 
-
 contract Multivest is Ownable {
-
     using SafeMath for uint256;
 
     /* public variables */
-    mapping (address => bool) public allowedMultivests;
+    mapping(address => bool) public allowedMultivests;
 
     /* events */
     event MultivestSet(address multivest);
@@ -37,20 +34,26 @@ contract Multivest is Ownable {
         MultivestUnset(_address);
     }
 
-    function multivestBuy(address _address, uint256 _value) public onlyAllowedMultivests(msg.sender) {
+    function multivestBuy(address _address, uint256 _value)
+        public
+        onlyAllowedMultivests(msg.sender)
+    {
         require(buy(_address, _value) == true);
     }
 
-    function multivestBuy(
-        address _address,
-        uint8 _v,
-        bytes32 _r,
-        bytes32 _s
-    ) public payable onlyAllowedMultivests(verify(keccak256(msg.sender), _v, _r, _s)) {
+    function multivestBuy(address _address, uint8 _v, bytes32 _r, bytes32 _s)
+        public
+        payable
+        onlyAllowedMultivests(verify(keccak256(msg.sender), _v, _r, _s))
+    {
         require(_address == msg.sender && buy(msg.sender, msg.value) == true);
     }
 
-    function verify(bytes32 _hash, uint8 _v, bytes32 _r, bytes32 _s) internal pure returns (address) {
+    function verify(bytes32 _hash, uint8 _v, bytes32 _r, bytes32 _s)
+        internal
+        pure
+        returns (address)
+    {
         bytes memory prefix = "\x19Ethereum Signed Message:\n32";
 
         return ecrecover(keccak256(prefix, _hash), _v, _r, _s);
