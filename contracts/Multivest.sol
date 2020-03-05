@@ -23,12 +23,12 @@ contract Multivest is Ownable {
 
     function setAllowedMultivest(address _address) public onlyOwner {
         allowedMultivests[_address] = true;
-        MultivestSet(_address);
+        emit MultivestSet(_address);
     }
 
     function unsetAllowedMultivest(address _address) public onlyOwner {
         allowedMultivests[_address] = false;
-        MultivestUnset(_address);
+        emit MultivestUnset(_address);
     }
 
     function multivestBuy(address _address, uint256 _value)
