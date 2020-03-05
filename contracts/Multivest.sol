@@ -21,9 +21,6 @@ contract Multivest is Ownable {
         _;
     }
 
-    /* constructor */
-    function Multivest() public {}
-
     function setAllowedMultivest(address _address) public onlyOwner {
         allowedMultivests[_address] = true;
         MultivestSet(_address);
