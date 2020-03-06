@@ -1,13 +1,11 @@
-pragma solidity 0.4.19;
+pragma solidity >=0.4.19 <0.6.2;
 
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import "./OpsToken";
 import "./ICO.sol";
 import "./Ownable.sol";
 
-
 contract OpsAllocation is Ownable {
-
     OpsToken public token;
     ICO public ico;
 
@@ -15,9 +13,13 @@ contract OpsAllocation is Ownable {
 
     uint256 public constant DECIMALS = 18;
 
-    uint256 public remainingTeamTokens = uint256(100000000).mul(uint(10) ** uint(DECIMALS));
+    uint256 public remainingTeamTokens = uint256(100000000).mul(
+        uint256(10)**uint256(DECIMALS)
+    );
 
-    uint256 public remainingGrowthTokens = uint256(350000000).mul(uint(10) ** uint(DECIMALS));
+    uint256 public remainingGrowthTokens = uint256(350000000).mul(
+        uint256(10)**uint256(DECIMALS)
+    );
 
     address public growthTokensAddress;
 
@@ -31,7 +33,11 @@ contract OpsAllocation is Ownable {
         address _ico,
         address _growthTokensAddress
     ) public {
-        require(_token != address(0) && _ico != address(0) && _growthTokensAddress != address(0));
+        require(
+            _token != address(0) &&
+                _ico != address(0) &&
+                _growthTokensAddress != address(0)
+        );
         token = OpsToken(_token);
         ico = ICO(_ico);
         lastReleaseTime = ico.endTime().add(1 days);
@@ -62,23 +68,28 @@ contract OpsAllocation is Ownable {
     }
 
     function claimGrowthTokens() public {
-        if (growthTokensLastClaim > ico.endTime() && growthTokensLastClaim.add(1 years) > block.timestamp) {
+        if (
+            growthTokensLastClaim > ico.endTime() &&
+            growthTokensLastClaim.add(1 years) > block.timestamp
+        ) {
             return;
         }
 
-        uint256 amount = uint256(50000000).mul(uint(10) ** uint(DECIMALS));
+        uint256 amount = uint256(50000000).mul(uint256(10)**uint256(DECIMALS));
 
         require(
             remainingGrowthTokens >= amount &&
-            msg.sender == growthTokensAddress &&
-            amount == token.mint(msg.sender, amount)
+                msg.sender == growthTokensAddress &&
+                amount == token.mint(msg.sender, amount)
         );
         remainingGrowthTokens = remainingGrowthTokens.sub(amount);
         growthTokensLastClaim = growthTokensLastClaim.add(1 years);
     }
 
     function claim() public {
-        if (team.length == 0 || lastReleaseTime.add(30 days) > block.timestamp) {
+        if (
+            team.length == 0 || lastReleaseTime.add(30 days) > block.timestamp
+        ) {
             return;
         }
 
