@@ -35,7 +35,7 @@ contract Multivest is Ownable {
         public
         onlyAllowedMultivests(msg.sender)
     {
-        require(buy(_address, _value) == true);
+        require(buy(_address, _value) == true, "");
     }
 
     function multivestBuy(address _address, uint8 _v, bytes32 _r, bytes32 _s)
@@ -43,7 +43,10 @@ contract Multivest is Ownable {
         payable
         onlyAllowedMultivests(verify(keccak256(msg.sender), _v, _r, _s))
     {
-        require(_address == msg.sender && buy(msg.sender, msg.value) == true);
+        require(
+            _address == msg.sender && buy(msg.sender, msg.value) == true,
+            ""
+        );
     }
 
     function verify(bytes32 _hash, uint8 _v, bytes32 _r, bytes32 _s)
