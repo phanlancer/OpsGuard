@@ -28,11 +28,9 @@ contract OpsAllocation is Ownable {
 
     address[] public team;
 
-    function OpsAllocation(
-        address _token,
-        address _ico,
-        address _growthTokensAddress
-    ) public {
+    constructor(address _token, address _ico, address _growthTokensAddress)
+        public
+    {
         require(
             _token != address(0) &&
                 _ico != address(0) &&
