@@ -45,12 +45,12 @@ contract OpsAllocation is Ownable {
     }
 
     function setTokenContract(address _token) public onlyOwner {
-        require(_token != address(0));
+        require(_token != address(0), "");
         token = OpsToken(_token);
     }
 
     function setICO(address _ico) public onlyOwner {
-        require(_ico != address(0));
+        require(_ico != address(0), "");
         ico = ICO(_ico);
     }
 
