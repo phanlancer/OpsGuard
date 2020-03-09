@@ -1,7 +1,7 @@
 pragma solidity >=0.4.19 <0.6.2;
 
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
-import "./OpsToken";
+import "./OpsToken.sol";
 import "./ICO.sol";
 import "./Ownable.sol";
 
@@ -34,7 +34,8 @@ contract OpsAllocation is Ownable {
         require(
             _token != address(0) &&
                 _ico != address(0) &&
-                _growthTokensAddress != address(0)
+                _growthTokensAddress != address(0),
+            ""
         );
         token = OpsToken(_token);
         ico = ICO(_ico);
