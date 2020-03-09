@@ -79,7 +79,8 @@ contract OpsAllocation is Ownable {
         require(
             remainingGrowthTokens >= amount &&
                 msg.sender == growthTokensAddress &&
-                amount == token.mint(msg.sender, amount)
+                amount == token.mint(msg.sender, amount),
+            ""
         );
         remainingGrowthTokens = remainingGrowthTokens.sub(amount);
         growthTokensLastClaim = growthTokensLastClaim.add(1 years);
