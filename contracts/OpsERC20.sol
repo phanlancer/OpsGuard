@@ -1,9 +1,7 @@
-pragma solidity 0.4.19;
-
+pragma solidity >=0.4.19 <0.6.2;
 
 import "zeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
 import "./Ownable.sol";
-
 
 contract OpsERC20 is StandardToken, Ownable {
     /* Public variables of the token */
@@ -52,28 +50,40 @@ contract OpsERC20 is StandardToken, Ownable {
         return super.transfer(_to, _value);
     }
 
-    function approve(address _spender, uint256 _value) public returns (bool success) {
+    function approve(address _spender, uint256 _value)
+        public
+        returns (bool success)
+    {
         if (locked) {
             return false;
         }
         return super.approve(_spender, _value);
     }
 
-    function increaseApproval(address _spender, uint _addedValue) public returns (bool success) {
+    function increaseApproval(address _spender, uint256 _addedValue)
+        public
+        returns (bool success)
+    {
         if (locked) {
             return false;
         }
         return super.increaseApproval(_spender, _addedValue);
     }
 
-    function decreaseApproval(address _spender, uint _subtractedValue) public returns (bool success) {
+    function decreaseApproval(address _spender, uint256 _subtractedValue)
+        public
+        returns (bool success)
+    {
         if (locked) {
             return false;
         }
         return super.decreaseApproval(_spender, _subtractedValue);
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+    function transferFrom(address _from, address _to, uint256 _value)
+        public
+        returns (bool success)
+    {
         if (locked) {
             return false;
         }
