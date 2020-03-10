@@ -101,7 +101,7 @@ contract OpsAllocation is Ownable {
         }
 
         for (uint256 i = 0; i < team.length; i++) {
-            require(amount == token.mint(team[i], amount));
+            require(amount == token.mint(team[i], amount), "");
         }
 
         lastReleaseTime = lastReleaseTime.add(30 days);
