@@ -46,7 +46,7 @@ contract OpsERC20 is StandardToken, Ownable {
 
     /* public methods */
     function transfer(address _to, uint256 _value) public returns (bool) {
-        require(locked == false);
+        require(locked == false, "");
         return super.transfer(_to, _value);
     }
 
