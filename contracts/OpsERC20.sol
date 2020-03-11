@@ -18,7 +18,7 @@ contract OpsERC20 is StandardToken, Ownable {
     bool public locked;
 
     /* Initializes contract with initial supply tokens to the creator of the contract */
-    function OpsERC20(
+    constructor(
         uint256 _totalSupply,
         string _tokenName,
         uint8 _decimalUnits,
