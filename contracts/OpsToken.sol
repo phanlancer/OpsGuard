@@ -124,7 +124,7 @@ contract OpsToken is MintingERC20 {
 
     function burnInvestorTokens(address _address)
         public
-        constant
+        view
         onlySellable
         returns (uint256 amount)
     {
