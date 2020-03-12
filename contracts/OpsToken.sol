@@ -1,13 +1,10 @@
-pragma solidity 0.4.19;
-
+pragma solidity >=0.4.19 <0.6.2;
 
 import "./MintingERC20.sol";
 import "./SellableToken.sol";
 import "./LockupContract.sol";
 
-
 contract OpsToken is MintingERC20 {
-
     SellableToken public ico;
     SellableToken public privateSale;
     LockupContract public lockupContract;
@@ -17,21 +14,27 @@ contract OpsToken is MintingERC20 {
     bool public transferFrozen = true;
 
     modifier onlySellable() {
-        require(msg.sender == address(ico) || msg.sender == address(privateSale));
+        require(
+            msg.sender == address(ico) || msg.sender == address(privateSale)
+        );
         _;
     }
 
-    function OpsToken(
-        address _bountyAddress,
-        bool _locked
-    )
-        public MintingERC20(0, maxSupply, "Opscoin", 18, "OPS", false, _locked)
+    function OpsToken(address _bountyAddress, bool _locked)
+        public
+        MintingERC20(0, maxSupply, "Opscoin", 18, "OPS", false, _locked)
     {
         require(_bountyAddress != address(0));
         bountyAddress = _bountyAddress;
         standard = "OPS 0.1";
-        maxSupply = uint(1000000000).mul(uint(10) ** decimals);
-        require(uint(10000000).mul(uint(10) ** decimals) == super.mint(bountyAddress, uint(10000000).mul(uint(10) ** decimals)));
+        maxSupply = uint256(1000000000).mul(uint256(10)**decimals);
+        require(
+            uint256(10000000).mul(uint256(10)**decimals) ==
+                super.mint(
+                    bountyAddress,
+                    uint256(10000000).mul(uint256(10)**decimals)
+                )
+        );
     }
 
     function setICO(address _ico) public onlyOwner {
@@ -54,12 +57,20 @@ contract OpsToken is MintingERC20 {
     }
 
     function freezing(bool _transferFrozen) public onlyOwner {
-        if (address(ico) != address(0) && !ico.isActive() && block.timestamp >= ico.startTime()) {
+        if (
+            address(ico) != address(0) &&
+            !ico.isActive() &&
+            block.timestamp >= ico.startTime()
+        ) {
             transferFrozen = _transferFrozen;
         }
     }
 
-    function mint(address _addr, uint256 _amount) public onlyMinters returns (uint256) {
+    function mint(address _addr, uint256 _amount)
+        public
+        onlyMinters
+        returns (uint256)
+    {
         if (msg.sender == owner) {
             require(address(ico) != address(0));
             if (!ico.isActive()) {
@@ -70,19 +81,30 @@ contract OpsToken is MintingERC20 {
         return super.mint(_addr, _amount);
     }
 
-    function transferAllowed(address _address, uint256 _amount) public view returns (bool) {
-        return !transferFrozen && lockupContract.isTransferAllowed(_address, _amount);
+    function transferAllowed(address _address, uint256 _amount)
+        public
+        view
+        returns (bool)
+    {
+        return
+            !transferFrozen &&
+            lockupContract.isTransferAllowed(_address, _amount);
     }
 
-    function transfer(address _to, uint _value) public returns (bool) {
-        require(msg.sender == bountyAddress || transferAllowed(msg.sender, _value));
+    function transfer(address _to, uint256 _value) public returns (bool) {
+        require(
+            msg.sender == bountyAddress || transferAllowed(msg.sender, _value)
+        );
         if (msg.sender == bountyAddress) {
             lockupContract.log(_to, _value);
         }
         return super.transfer(_to, _value);
     }
 
-    function transferFrom(address _from, address _to, uint _value) public returns (bool success) {
+    function transferFrom(address _from, address _to, uint256 _value)
+        public
+        returns (bool success)
+    {
         require(_from == bountyAddress || transferAllowed(_from, _value));
         if (_from == bountyAddress) {
             lockupContract.log(_to, _value);
@@ -100,7 +122,12 @@ contract OpsToken is MintingERC20 {
         }
     }
 
-    function burnInvestorTokens(address _address) public constant onlySellable returns (uint256 amount) {
+    function burnInvestorTokens(address _address)
+        public
+        constant
+        onlySellable
+        returns (uint256 amount)
+    {
         amount = balances[_address];
         balances[_address] = 0;
         Transfer(_address, address(0), amount);
