@@ -15,7 +15,8 @@ contract OpsToken is MintingERC20 {
 
     modifier onlySellable() {
         require(
-            msg.sender == address(ico) || msg.sender == address(privateSale)
+            msg.sender == address(ico) || msg.sender == address(privateSale),
+            ""
         );
         _;
     }
