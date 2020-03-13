@@ -25,7 +25,7 @@ contract OpsToken is MintingERC20 {
         public
         MintingERC20(0, maxSupply, "Opscoin", 18, "OPS", false, _locked)
     {
-        require(_bountyAddress != address(0));
+        require(_bountyAddress != address(0), "");
         bountyAddress = _bountyAddress;
         standard = "OPS 0.1";
         maxSupply = uint256(1000000000).mul(uint256(10)**decimals);
