@@ -21,7 +21,7 @@ contract OpsToken is MintingERC20 {
         _;
     }
 
-    function OpsToken(address _bountyAddress, bool _locked)
+    constructor(address _bountyAddress, bool _locked)
         public
         MintingERC20(0, maxSupply, "Opscoin", 18, "OPS", false, _locked)
     {
