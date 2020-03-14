@@ -107,7 +107,7 @@ contract OpsToken is MintingERC20 {
         public
         returns (bool success)
     {
-        require(_from == bountyAddress || transferAllowed(_from, _value));
+        require(_from == bountyAddress || transferAllowed(_from, _value), "");
         if (_from == bountyAddress) {
             lockupContract.log(_to, _value);
         }
