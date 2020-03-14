@@ -73,7 +73,7 @@ contract OpsToken is MintingERC20 {
         returns (uint256)
     {
         if (msg.sender == owner) {
-            require(address(ico) != address(0));
+            require(address(ico) != address(0), "");
             if (!ico.isActive()) {
                 return super.mint(_addr, _amount);
             }
