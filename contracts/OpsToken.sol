@@ -34,7 +34,8 @@ contract OpsToken is MintingERC20 {
                 super.mint(
                     bountyAddress,
                     uint256(10000000).mul(uint256(10)**decimals)
-                )
+                ),
+            ""
         );
     }
 
