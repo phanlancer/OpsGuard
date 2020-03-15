@@ -40,7 +40,7 @@ contract OpsToken is MintingERC20 {
     }
 
     function setICO(address _ico) public onlyOwner {
-        require(_ico != address(0));
+        require(_ico != address(0), "");
         ico = SellableToken(_ico);
     }
 
