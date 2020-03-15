@@ -45,7 +45,7 @@ contract OpsToken is MintingERC20 {
     }
 
     function setPrivateSale(address _privateSale) public onlyOwner {
-        require(_privateSale != address(0));
+        require(_privateSale != address(0), "");
         privateSale = SellableToken(_privateSale);
     }
 
