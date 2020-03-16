@@ -50,7 +50,7 @@ contract OpsToken is MintingERC20 {
     }
 
     function setLockupContract(address _lockupContract) public onlyOwner {
-        require(_lockupContract != address(0));
+        require(_lockupContract != address(0), "");
         lockupContract = LockupContract(_lockupContract);
     }
 
