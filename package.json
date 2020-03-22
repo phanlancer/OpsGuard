@@ -28,20 +28,20 @@
   },
   "dependencies": {
     "minimetoken": "^0.2.0",
-    "truffle": "^5.1.14",
-    "zeppelin-solidity": "^1.7.0"
+    "truffle": "^5.1.18",
+    "zeppelin-solidity": "^1.12.0"
   },
   "devDependencies": {
     "bignumber.js": "^4.1.0",
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eth-gas-reporter": "^0.2.15",
-    "ethereumjs-abi": "^0.6.5",
-    "ganache-cli": "^6.0.3",
+    "eth-gas-reporter": "^0.2.16",
+    "ethereumjs-abi": "^0.6.8",
+    "ganache-cli": "^6.9.1",
     "husky": "^0.14.3",
     "mocha": "^5.0.0",
-    "mocha-junit-reporter": "^1.17.0",
+    "mocha-junit-reporter": "^1.23.3",
     "mocha-multi-reporters": "^1.1.7",
-    "solhint": "^2.3.0"
+    "solhint": "^2.3.1"
   }
 }
