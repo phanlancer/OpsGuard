@@ -39,7 +39,7 @@
     "ethereumjs-abi": "^0.6.8",
     "ganache-cli": "^6.9.1",
     "husky": "^0.14.3",
-    "mocha": "^5.0.0",
+    "mocha": "^7.1.1",
     "mocha-junit-reporter": "^1.23.3",
     "mocha-multi-reporters": "^1.1.7",
     "solhint": "^2.3.1"
