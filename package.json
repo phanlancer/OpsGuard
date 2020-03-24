@@ -20,7 +20,6 @@
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "solhint": "solhint 'contracts/**/*.sol'",
-    "precommit": "npm run solhint",
     "test:ci": "npm run solhint && npm run ganache && npm run test"
   },
   "directories": {
