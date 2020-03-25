@@ -5,7 +5,7 @@ import "./SellableToken.sol";
 contract PrivateSale is SellableToken {
     uint256 public price = 4000; //0.04 cents * 10 ^ 5
 
-    function PrivateSale(
+    constructor(
         address _token,
         address _etherHolder,
         address _compensationAddress,
