@@ -1,12 +1,9 @@
 pragma solidity >=0.4.19 <0.6.2;
 
-
 import "./SellableToken.sol";
 
-
 contract PrivateSale is SellableToken {
-
-    uint256 public price = 4000;//0.04 cents * 10 ^ 5
+    uint256 public price = 4000; //0.04 cents * 10 ^ 5
 
     function PrivateSale(
         address _token,
@@ -16,13 +13,16 @@ contract PrivateSale is SellableToken {
         uint256 _endTime,
         uint256 _etherPriceInUSD, // if price 709.38000 the  value has to be 70938000
         uint256 _maxTokenSupply
-    ) public SellableToken(
-        _token,
-        _etherHolder,
-        _compensationAddress,
-        _etherPriceInUSD,
-        _maxTokenSupply
-    ) {
+    )
+        public
+        SellableToken(
+            _token,
+            _etherHolder,
+            _compensationAddress,
+            _etherPriceInUSD,
+            _maxTokenSupply
+        )
+    {
         require(_startTime > 0 && _endTime > _startTime);
         startTime = _startTime;
         endTime = _endTime;
@@ -35,7 +35,11 @@ contract PrivateSale is SellableToken {
         }
     }
 
-    function calculateTokensAmount(uint256 _value) public view returns (uint256 tokenAmount, uint256 usdAmount) {
+    function calculateTokensAmount(uint256 _value)
+        public
+        view
+        returns (uint256 tokenAmount, uint256 usdAmount)
+    {
         if (_value == 0) {
             return (0, 0);
         }
@@ -49,7 +53,11 @@ contract PrivateSale is SellableToken {
         usdAmount = usdAmount.div(1 ether);
     }
 
-    function calculateEthersAmount(uint256 _amount) public view returns (uint256 ethersAmount) {
+    function calculateEthersAmount(uint256 _amount)
+        public
+        view
+        returns (uint256 ethersAmount)
+    {
         if (_amount == 0 || _amount.mul(price) < minPurchase) {
             return 0;
         }
@@ -61,17 +69,21 @@ contract PrivateSale is SellableToken {
         return uint256(1 ether).mul(minPurchase).div(etherPriceInUSD);
     }
 
-    function getStats() public view returns (
-        uint256 start,
-        uint256 end,
-        uint256 sold,
-        uint256 maxSupply,
-        uint256 min,
-        uint256 soft,
-        uint256 hard,
-        uint256 priceAmount,
-        uint256 tokensPerEth
-    ) {
+    function getStats()
+        public
+        view
+        returns (
+            uint256 start,
+            uint256 end,
+            uint256 sold,
+            uint256 maxSupply,
+            uint256 min,
+            uint256 soft,
+            uint256 hard,
+            uint256 priceAmount,
+            uint256 tokensPerEth
+        )
+    {
         start = startTime;
         end = endTime;
         sold = soldTokens;
@@ -97,7 +109,12 @@ contract PrivateSale is SellableToken {
 
         uint256 mintedAmount = token.mint(_address, tokenAmount);
         soldTokens = soldTokens.add(tokenAmount);
-        require(mintedAmount == tokenAmount && maxTokenSupply >= soldTokens && usdAmount > 0 && mintedAmount > 0);
+        require(
+            mintedAmount == tokenAmount &&
+                maxTokenSupply >= soldTokens &&
+                usdAmount > 0 &&
+                mintedAmount > 0
+        );
 
         collectedEthers = collectedEthers.add(_value);
         collectedUSD = collectedUSD.add(usdAmount);
