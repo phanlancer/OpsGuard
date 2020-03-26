@@ -23,7 +23,7 @@ contract PrivateSale is SellableToken {
             _maxTokenSupply
         )
     {
-        require(_startTime > 0 && _endTime > _startTime);
+        require(_startTime > 0 && _endTime > _startTime, "");
         startTime = _startTime;
         endTime = _endTime;
     }
