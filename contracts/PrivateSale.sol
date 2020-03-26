@@ -100,7 +100,7 @@ contract PrivateSale is SellableToken {
         if (_value == 0) {
             return false;
         }
-        require(_address != address(0) && withinPeriod());
+        require(_address != address(0) && withinPeriod(), "");
 
         uint256 tokenAmount;
         uint256 usdAmount;
