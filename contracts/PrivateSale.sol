@@ -113,7 +113,8 @@ contract PrivateSale is SellableToken {
             mintedAmount == tokenAmount &&
                 maxTokenSupply >= soldTokens &&
                 usdAmount > 0 &&
-                mintedAmount > 0
+                mintedAmount > 0,
+            ""
         );
 
         collectedEthers = collectedEthers.add(_value);
