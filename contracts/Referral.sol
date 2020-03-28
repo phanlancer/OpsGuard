@@ -1,29 +1,23 @@
 pragma solidity >=0.4.19 <0.6.2;
 
-
 import "./Multivest.sol";
 import "./OpsToken.sol";
 import "./LockupContract.sol";
 
-
 contract Referral is Multivest {
-
     OpsToken public token;
     LockupContract public lockupContract;
 
     uint256 public constant DECIMALS = 18;
 
-    uint256 public totalSupply = 10000000 * 10 ** DECIMALS;
+    uint256 public totalSupply = 10000000 * 10**DECIMALS;
 
     address public tokenHolder;
 
-    mapping (address => bool) public claimed;
+    mapping(address => bool) public claimed;
 
     /* constructor */
-    function Referral(
-        address _token,
-        address _tokenHolder
-    ) public Multivest() {
+    function Referral(address _token, address _tokenHolder) public Multivest() {
         require(_token != address(0) && _tokenHolder != address(0));
         token = OpsToken(_token);
         tokenHolder = _tokenHolder;
@@ -52,14 +46,19 @@ contract Referral is Multivest {
         uint8 _v,
         bytes32 _r,
         bytes32 _s
-    ) public onlyAllowedMultivests(verify(keccak256(msg.sender, _amount), _v, _r, _s)) {
-        _amount = _amount.mul(10 ** DECIMALS);
+    )
+        public
+        onlyAllowedMultivests(
+            verify(keccak256(msg.sender, _amount), _v, _r, _s)
+        )
+    {
+        _amount = _amount.mul(10**DECIMALS);
         require(
             claimed[_address] == false &&
-            _address == msg.sender &&
-            _amount > 0 &&
-            _amount <= totalSupply &&
-            _amount == token.mint(_address, _amount)
+                _address == msg.sender &&
+                _amount > 0 &&
+                _amount <= totalSupply &&
+                _amount == token.mint(_address, _amount)
         );
 
         totalSupply = totalSupply.sub(_amount);
