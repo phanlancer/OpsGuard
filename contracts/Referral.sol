@@ -17,7 +17,7 @@ contract Referral is Multivest {
     mapping(address => bool) public claimed;
 
     /* constructor */
-    function Referral(address _token, address _tokenHolder) public Multivest() {
+    constructor(address _token, address _tokenHolder) public Multivest() {
         require(_token != address(0) && _tokenHolder != address(0));
         token = OpsToken(_token);
         tokenHolder = _tokenHolder;
