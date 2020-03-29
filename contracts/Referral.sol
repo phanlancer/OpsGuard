@@ -4,6 +4,7 @@ import "./Multivest.sol";
 import "./OpsToken.sol";
 import "./LockupContract.sol";
 
+
 contract Referral is Multivest {
     OpsToken public token;
     LockupContract public lockupContract;
@@ -18,7 +19,7 @@ contract Referral is Multivest {
 
     /* constructor */
     constructor(address _token, address _tokenHolder) public Multivest() {
-        require(_token != address(0) && _tokenHolder != address(0));
+        require(_token != address(0) && _tokenHolder != address(0), "");
         token = OpsToken(_token);
         tokenHolder = _tokenHolder;
     }
@@ -30,7 +31,7 @@ contract Referral is Multivest {
     }
 
     function setLockupContract(address _lockupContract) public onlyOwner {
-        require(_lockupContract != address(0));
+        require(_lockupContract != address(0), "");
         lockupContract = LockupContract(_lockupContract);
     }
 
