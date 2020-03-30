@@ -59,7 +59,8 @@ contract Referral is Multivest {
                 _address == msg.sender &&
                 _amount > 0 &&
                 _amount <= totalSupply &&
-                _amount == token.mint(_address, _amount)
+                _amount == token.mint(_address, _amount),
+            ""
         );
 
         totalSupply = totalSupply.sub(_amount);
