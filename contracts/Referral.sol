@@ -41,7 +41,7 @@ contract Referral is Multivest {
         }
     }
 
-    function multivestMint(
+    constructor(
         address _address,
         uint256 _amount,
         uint8 _v,
