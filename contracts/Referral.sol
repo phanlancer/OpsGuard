@@ -70,7 +70,7 @@ contract Referral is Multivest {
 
     function claimUnsoldTokens() public {
         if (msg.sender == tokenHolder && totalSupply > 0) {
-            require(totalSupply == token.mint(msg.sender, totalSupply));
+            require(totalSupply == token.mint(msg.sender, totalSupply), "");
             totalSupply = 0;
         }
     }
