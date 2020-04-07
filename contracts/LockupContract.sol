@@ -1,10 +1,11 @@
-pragma solidity >=0.4.19 <0.6.2;
+pragma solidity >=0.4.19 <0.6.5;
 
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import "./Ownable.sol";
 import "./OpsToken.sol";
 import "./SellableToken.sol";
 import "./Referral.sol";
+
 
 contract LockupContract is Ownable {
     OpsToken public token;
@@ -100,5 +101,4 @@ contract LockupContract is Ownable {
 
         return false;
     }
-
 }
