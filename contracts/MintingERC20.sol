@@ -1,7 +1,8 @@
-pragma solidity >=0.4.19 <0.6.2;
+pragma solidity >=0.4.19 <0.6.5;
 
 import "./OpsERC20.sol";
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
+
 
 /*
 This contract manages the minters and the modifier to allow mint to happen only if called by minters
@@ -76,5 +77,4 @@ contract MintingERC20 is OpsERC20 {
 
         return _amount;
     }
-
 }
