@@ -1,7 +1,8 @@
-pragma solidity >=0.4.19 <0.6.2;
+pragma solidity >=0.4.19 <0.6.5;
 
 import "zeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
 import "./Ownable.sol";
+
 
 contract OpsERC20 is StandardToken, Ownable {
     /* Public variables of the token */
@@ -90,5 +91,4 @@ contract OpsERC20 is StandardToken, Ownable {
 
         return super.transferFrom(_from, _to, _value);
     }
-
 }
