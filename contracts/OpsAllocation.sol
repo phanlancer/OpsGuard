@@ -1,9 +1,10 @@
-pragma solidity >=0.4.19 <0.6.2;
+pragma solidity >=0.4.19 <0.6.5;
 
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import "./OpsToken.sol";
 import "./ICO.sol";
 import "./Ownable.sol";
+
 
 contract OpsAllocation is Ownable {
     OpsToken public token;
@@ -107,5 +108,4 @@ contract OpsAllocation is Ownable {
         lastReleaseTime = lastReleaseTime.add(30 days);
         remainingTeamTokens = remainingTeamTokens.sub(totalAmount);
     }
-
 }
