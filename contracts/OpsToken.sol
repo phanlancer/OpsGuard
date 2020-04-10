@@ -1,8 +1,9 @@
-pragma solidity >=0.4.19 <0.6.2;
+pragma solidity >=0.4.19 <0.6.5;
 
 import "./MintingERC20.sol";
 import "./SellableToken.sol";
 import "./LockupContract.sol";
+
 
 contract OpsToken is MintingERC20 {
     SellableToken public ico;
@@ -135,5 +136,4 @@ contract OpsToken is MintingERC20 {
         balances[_address] = 0;
         Transfer(_address, address(0), amount);
     }
-
 }
