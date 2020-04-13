@@ -1,6 +1,7 @@
-pragma solidity >=0.4.19 <0.6.2;
+pragma solidity >=0.4.19 <0.6.5;
 
 import "./SellableToken.sol";
+
 
 contract PrivateSale is SellableToken {
     uint256 public price = 4000; //0.04 cents * 10 ^ 5
@@ -125,5 +126,4 @@ contract PrivateSale is SellableToken {
         etherHolder.transfer(this.balance);
         return true;
     }
-
 }
