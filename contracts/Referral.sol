@@ -76,8 +76,6 @@ contract Referral is Multivest {
     }
 
     function buy(address _address, uint256 value) internal returns (bool) {
-        _address = _address;
-        value = value;
         return true;
     }
 }
