@@ -64,7 +64,8 @@ contract SellableToken is Multivest {
         token = OpsToken(_token);
 
         require(
-            _etherHolder != address(0) && _compensationAddress != address(0)
+            _etherHolder != address(0) && _compensationAddress != address(0),
+            ""
         );
         etherHolder = _etherHolder;
         compensationAddress = _compensationAddress;
