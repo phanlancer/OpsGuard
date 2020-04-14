@@ -60,7 +60,7 @@ contract SellableToken is Multivest {
         uint256 _etherPriceInUSD,
         uint256 _maxTokenSupply
     ) public Multivest() {
-        require(_token != address(0));
+        require(_token != address(0), "");
         token = OpsToken(_token);
 
         require(
