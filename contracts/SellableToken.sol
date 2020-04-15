@@ -71,7 +71,8 @@ contract SellableToken is Multivest {
         compensationAddress = _compensationAddress;
         require(
             (_maxTokenSupply == uint256(0)) ||
-                (_maxTokenSupply <= token.maxSupply())
+                (_maxTokenSupply <= token.maxSupply()),
+            ""
         );
 
         etherPriceInUSD = _etherPriceInUSD;
