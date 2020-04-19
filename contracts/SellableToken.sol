@@ -83,7 +83,8 @@ contract SellableToken is Multivest {
 
     receive() external payable {
         require(
-            true == whitelist[msg.sender] && buy(msg.sender, msg.value) == true
+            true == whitelist[msg.sender] && buy(msg.sender, msg.value) == true,
+            ""
         );
     }
 
