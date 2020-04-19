@@ -89,7 +89,7 @@ contract SellableToken is Multivest {
     }
 
     function setTokenContract(address _token) public onlyOwner {
-        require(_token != address(0));
+        require(_token != address(0), "");
         token = OpsToken(_token);
     }
 
