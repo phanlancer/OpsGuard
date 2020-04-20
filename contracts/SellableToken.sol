@@ -159,7 +159,7 @@ contract SellableToken is Multivest {
 
         uint256 newPrice = uint256(10**23).div(parseInt(_price, 5));
 
-        require(newPrice > 0);
+        require(newPrice > 0, "");
 
         etherPriceInUSD = parseInt(_price, 5);
 
