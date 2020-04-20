@@ -155,7 +155,7 @@ contract SellableToken is Multivest {
         uint256 dot = bytePrice.length.sub(uint256(6));
 
         // check if dot is in 6 position  from  the last
-        require(0x2e == uint256(bytePrice[dot]));
+        require(0x2e == uint256(bytePrice[dot]), "");
 
         uint256 newPrice = uint256(10**23).div(parseInt(_price, 5));
 
