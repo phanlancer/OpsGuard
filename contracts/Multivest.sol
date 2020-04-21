@@ -3,6 +3,7 @@ pragma solidity >=0.4.19 <0.6.5;
 import "./Ownable.sol";
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 
+
 contract Multivest is Ownable {
     using SafeMath for uint256;
 
@@ -60,5 +61,4 @@ contract Multivest is Ownable {
     }
 
     function buy(address _address, uint256 _value) internal returns (bool);
-
 }
