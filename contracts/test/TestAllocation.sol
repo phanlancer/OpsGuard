@@ -4,11 +4,10 @@ import "../OpsAllocation.sol";
 
 
 contract TestAllocation is OpsAllocation {
-    function TestAllocation(
-        address _token,
-        address _ico,
-        address _growthTokensAddress
-    ) public OpsAllocation(_token, _ico, _growthTokensAddress) {}
+    constructor(address _token, address _ico, address _growthTokensAddress)
+        public
+        OpsAllocation(_token, _ico, _growthTokensAddress)
+    {}
 
     function setLastReleaseTime(uint256 _val) public {
         lastReleaseTime = _val;
