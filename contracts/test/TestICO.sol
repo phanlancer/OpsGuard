@@ -4,7 +4,7 @@ import "../ICO.sol";
 
 
 contract TestICO is ICO {
-    function TestICO(
+    constructor(
         address _token,
         address _etherHolder,
         address _compensationAddress,
