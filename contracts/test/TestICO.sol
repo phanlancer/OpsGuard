@@ -1,37 +1,36 @@
-pragma solidity 0.4.19;
-
+pragma solidity >=0.4.19 <0.6.5;
 
 import "../ICO.sol";
 
 
 contract TestICO is ICO {
     function TestICO(
-    address _token,
-    address _etherHolder,
-    address _compensationAddress,
-    uint256 _etherPriceInUSD, // if price 709.38000 the  value has to be 70938000
-    uint256 _maxTokenSupply
-    ) public ICO(
-    _token,
-    _etherHolder,
-    _compensationAddress,
-    _etherPriceInUSD, // if price 709.38000 the  value has to be 70938000
-    _maxTokenSupply
-    ) {
+        address _token,
+        address _etherHolder,
+        address _compensationAddress,
+        uint256 _etherPriceInUSD, // if price 709.38000 the  value has to be 70938000
+        uint256 _maxTokenSupply
+    )
+        public
+        ICO(
+            _token,
+            _etherHolder,
+            _compensationAddress,
+            _etherPriceInUSD, // if price 709.38000 the  value has to be 70938000
+            _maxTokenSupply
+        )
+    {}
 
-    }
-
-    function getPreICOStats() public view returns (
-    uint256,
-    uint256,
-    uint256,
-    bool
-    ) {
+    function getPreICOStats()
+        public
+        view
+        returns (uint256, uint256, uint256, bool)
+    {
         return (
-        preICOStats.soldTokens,
-        preICOStats.collectedUSD,
-        preICOStats.collectedEthers,
-        preICOStats.burned
+            preICOStats.soldTokens,
+            preICOStats.collectedUSD,
+            preICOStats.collectedEthers,
+            preICOStats.burned
         );
     }
 
@@ -46,7 +45,6 @@ contract TestICO is ICO {
     function testChangeCompensationAmount(uint256 _val) public {
         compensationAmount = _val;
     }
-
 
     //    function() public payable {
     //        require(buy(msg.sender, msg.value) == true);
@@ -72,5 +70,4 @@ contract TestICO is ICO {
     //
     //        return calculateEthersAmount(_value);
     //    }
-
 }
