@@ -3,7 +3,7 @@ import "../Multivest.sol";
 
 
 contract TestMultivest is Multivest {
-    function TestMultivest(address allowedMultivest) public Multivest() {
+    constructor(address allowedMultivest) public Multivest() {
         setAllowedMultivest(allowedMultivest);
     }
 
