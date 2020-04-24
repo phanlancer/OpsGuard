@@ -1,11 +1,9 @@
-pragma solidity ^0.4.13;
+pragma solidity >=0.4.19 <0.6.5;
+import "../Multivest.sol";
 
-import '../Multivest.sol';
 
 contract TestMultivest is Multivest {
-    function TestMultivest(address allowedMultivest) public
-    Multivest()
-    {
+    function TestMultivest(address allowedMultivest) public Multivest() {
         setAllowedMultivest(allowedMultivest);
     }
 
