@@ -4,7 +4,7 @@ import "../OpsToken.sol";
 
 
 contract TestOpsToken is OpsToken {
-    function TestOpsToken(address _bountyAddress, bool _locked)
+    constructor(address _bountyAddress, bool _locked)
         public
         OpsToken(_bountyAddress, _locked)
     {}
