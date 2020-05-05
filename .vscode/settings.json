@@ -4,7 +4,9 @@
     "ethereum",
     "ethereumjs",
     "junit",
+    "junitresults",
     "minimetoken",
+    "norpc",
     "solhint"
   ]
 }
