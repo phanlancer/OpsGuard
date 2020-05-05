@@ -7,6 +7,7 @@
     "junitresults",
     "minimetoken",
     "norpc",
+    "solcover",
     "solhint"
   ]
 }
