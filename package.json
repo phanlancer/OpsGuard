@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "minimetoken": "^0.2.0",
-    "truffle": "^5.1.39",
+    "truffle": "^5.1.44",
     "zeppelin-solidity": "^1.12.0"
   },
   "devDependencies": {
@@ -35,7 +35,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "ethereumjs-abi": "^0.6.8",
-    "ganache-cli": "^6.10.1",
+    "ganache-cli": "^6.10.2",
     "husky": "^0.14.3",
     "mocha": "^7.2.0",
     "mocha-junit-reporter": "^1.23.3",
